@@ -1,0 +1,103 @@
+{% comment %} <section id="middle-banners">
+  <div class="align-middle-banner">
+    <div class="main-middle-banner">
+      <a href="#">
+        <img src="https://beige.pk/cdn/shop/files/Tile-01.jpg?v=1729583545&width=832" />
+        <h3>Women</h3>
+      </a>
+    </div>
+    <div class="main-middle-banner">
+      <a href="#">
+        <img src="https://beige.pk/cdn/shop/files/Tile-01.jpg?v=1729583545&width=832" />
+        <h3>Kids</h3>
+      </a>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+<section id="middle-banners">
+  <div class="align-middle-banner">
+    <div class="main-middle-banner">
+      <a href="{{ section.settings.women_link }}">
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ section.settings.women_mobile | img_url: '400x' }}">
+          <source media="(min-width: 768px)" srcset="{{ section.settings.women_desktop | img_url: '832x' }}">
+          <img src="{{ section.settings.women_desktop | img_url: '832x' }}" alt="{{ section.settings.women_heading }}">
+        </picture>
+        <h3>{{ section.settings.women_heading }}</h3>
+      </a>
+    </div>
+    <div class="main-middle-banner">
+      <a href="{{ section.settings.kids_link }}">
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ section.settings.kids_mobile | img_url: '400x' }}">
+          <source media="(min-width: 768px)" srcset="{{ section.settings.kids_desktop | img_url: '832x' }}">
+          <img src="{{ section.settings.kids_desktop | img_url: '832x' }}" alt="{{ section.settings.kids_heading }}">
+        </picture>
+        <h3>{{ section.settings.kids_heading }}</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% schema %}
+{
+  "name": "Middle Banners",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "women_desktop",
+      "label": "Women Banner (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "women_mobile",
+      "label": "Women Banner (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "women_heading",
+      "label": "Women Banner Heading",
+      "default": "Women"
+    },
+    {
+      "type": "url",
+      "id": "women_link",
+      "label": "Women Banner Link",
+      "default": "/"
+    },
+    {
+      "type": "image_picker",
+      "id": "kids_desktop",
+      "label": "Kids Banner (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "kids_mobile",
+      "label": "Kids Banner (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "kids_heading",
+      "label": "Kids Banner Heading",
+      "default": "Kids"
+    },
+    {
+      "type": "url",
+      "id": "kids_link",
+      "label": "Kids Banner Link",
+      "default": "/"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Middle Banners",
+      "category": "Image"
+    }
+  ]
+}
+
+{% endschema %}

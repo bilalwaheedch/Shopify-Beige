@@ -1,0 +1,205 @@
+<div class="main-filters">
+  <div class="align-filter">
+    <div class="filters-sidebar">
+      <div class="filter-title">
+        <h1>Filters</h1>
+        <div class="close-btn">
+          <p>Close</p>
+        </div>
+      </div>
+      <div class="filter-dropdowns-main">
+        <div class="filter-dropdown">
+          <div class="dropdown-title-filter">
+            <h3>Category</h3>
+          </div>
+          <div class="dropdowns-filters-items">
+            <div class="filters-items-align">
+              <ul>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="filter-dropdown">
+          <div class="dropdown-title-filter">
+            <h3>Category</h3>
+          </div>
+          <div class="dropdowns-filters-items">
+            <div class="filters-items-align">
+              <ul>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="filter-dropdown">
+          <div class="dropdown-title-filter">
+            <h3>Category</h3>
+          </div>
+          <div class="dropdowns-filters-items">
+            <div class="filters-items-align">
+              <ul>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="filter-dropdown">
+          <div class="dropdown-title-filter">
+            <h3>Category</h3>
+          </div>
+          <div class="dropdowns-filters-items">
+            <div class="filters-items-align">
+              <ul>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+                <li><a href="#">TOP</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-btns-filter">
+      <div class="button-sidebar">
+        <button type="button">Show result
+        </button>
+      </div>
+      <div class="clear-filters">
+        <a href="#">CLEAR ALL FILTERS</a>
+      </div>
+    </div>
+  </div>
+  <div class="layer-sidebar-filter"></div>
+</div>
+<div class="main-grid-new">
+  <div id="align-grid" class="align-grid">
+    {% for product in collections[collection.handle].products %}
+      <div class="grid-product-item">
+        <div class="grid-image">
+          <div class="simple-img">
+            <img src={{ product.featured_image | img_url: 'large' }}>
+          </div>
+          <div class="hovered-img">
+            <img src="{{ product.images[1] | img_url: 'large' }}">
+          </div>
+        </div>
+        <div class="grid-product-item-names">
+          <p>{{ product.title }}</p>
+          <p>{{ product.price }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  function setGrid() {
+
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const alignGrid = document.getElementById('align-grid');
+    const icon4 = document.getElementById('icon-4');
+    const icon8 = document.getElementById('icon-8');
+    const queryParams = new URLSearchParams(window.location.search);
+    const grid = queryParams.get('grid') || '4';
+    const newUrl = `${window.location.origin}${window.location.pathname}?grid=${grid === '4' ? '8' : '4'}`;
+
+    alignGrid.classList.remove(
+      grid === '4'
+        ? 'eight-grid'
+        : 'four-grid'
+    );
+    alignGrid.classList.add(
+      grid === '4'
+        ? 'four-grid'
+        : 'eight-grid'
+    );
+
+    icon4.style.display = grid === '4'
+      ? 'block'
+      : 'none';
+    icon8.style.display = grid === '4'
+      ? 'none'
+      : 'block';
+  });
+
+  document.querySelectorAll('.dropdown-title-filter').forEach(function(element) {
+    element.addEventListener('click', function(event) {
+      this.parentNode.classList.toggle('active-dropdown');
+      this
+        .parentNode
+        .querySelector('.dropdowns-filters-items')
+        .classList
+        .toggle('active-dropdown');
+      this
+        .parentNode
+        .querySelector('.dropdowns-filters-items')
+        .classList
+        .toggle('slideToggle');
+    });
+  });
+
+  document.querySelectorAll('.categories-links-main ul li a, .close-btn, .layer-sidebar-filter').forEach(function(element) {
+    element.addEventListener('click', function() {
+      document.querySelector('.layer-sidebar-filter').classList.toggle('show-layer');
+      document.querySelector('.align-filter').classList.toggle('enable-filters');
+      document.body.classList.toggle('stop-scroll');
+    });
+  });
+
+  document.querySelectorAll('.dropdowns-filters-items ul li a').forEach(function(element) {
+    element.addEventListener('click', function() {
+      this.classList.toggle('selected');
+    });
+  });
+  function changeGrid() {
+    let alignGrid = document.getElementById('align-grid');
+    let icon4 = document.getElementById('icon-4');
+    let icon8 = document.getElementById('icon-8');
+    let queryParams = new URLSearchParams(window.location.search);
+    let isGridQueryParams = queryParams.get('grid');
+    let grid = isGridQueryParams ?? '4';
+    let newUrl = `${
+      window.location.origin
+    }${
+      window.location.pathname
+    }?grid=`;
+
+    if (grid == '4') {
+      alignGrid.classList.remove('four-grid');
+      alignGrid.classList.add('eight-grid');
+      newUrl = newUrl + '8';
+      icon4.style.display = 'none';
+      icon8.style.display = 'block';
+    } else {
+      alignGrid.classList.remove('eight-grid');
+      alignGrid.classList.add('four-grid');
+      newUrl = newUrl + '4';
+      icon4.style.display = 'block';
+      icon8.style.display = 'none';
+    }
+    history.pushState({}, '', newUrl);
+  }
+</script>

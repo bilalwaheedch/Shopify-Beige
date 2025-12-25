@@ -1,0 +1,117 @@
+{%- liquid
+  assign dark_search_bg = false
+  assign lightness = settings.color_header_search | color_brightness
+
+  if lightness <= 100
+    assign dark_search_bg = true
+  endif
+-%}
+
+<style>
+  .site-header__search-container {
+      display: flex;
+      align-items: center;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      width: 50%;
+      z-index: 10001;
+      right: 0;
+      left: auto;
+      transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      background: white;
+      border-left: 1px solid #000;
+      transform: translateX(100%);
+  }
+  .site-header__search-container .page-width {
+      display: flex;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      align-items: flex-start;
+  }
+  .results__search-btn {
+      border-left: 0 !important;
+  }
+  .site-header__search-container.is-active {
+      z-index: 99;
+      transform: translateX(0);
+      width: 51%;
+  }
+  .site-header__search {
+    width: 100% !important;
+  }
+  predictive-search {
+    max-width: 100% !important;
+  }
+
+  </style>
+
+  
+
+<predictive-search
+  data-context="{{ context }}"
+  data-enabled="{{ settings.predictive_search_enabled }}"
+  data-dark="{{ dark_search_bg }}"
+>
+  <!-- <div
+    class="predictive__screen"
+    data-screen
+    style="    background: rgba(255,255,255,0.8);"
+  ></div> -->
+  <form action="{{ routes.search_url }}" method="get" role="search">
+    <label for="Search" class="hidden-label">Search</label>
+    <div class="search__input-wrap">
+      <input
+        class="search__input"
+        id="Search"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        role="combobox"
+        aria-expanded="false"
+        aria-owns="predictive-search-results"
+        aria-controls="predictive-search-results"
+        aria-haspopup="listbox"
+        aria-autocomplete="list"
+        autocorrect="off"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        tabindex="0"
+        style="
+          border: none;
+          border-bottom: 1px solid black;
+          width: 100%;
+          height: 61px;
+        "
+      >
+      <input name="options[prefix]" type="hidden" value="last">
+      <button class="btn--search" type="submit" style="display:none;">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64">
+          <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/>
+        </svg>
+        <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+      </button>
+    </div>
+
+    <button
+      class="btn--close-search"
+      style="
+        border-bottom: 1px solid black;
+        margin: 0;
+      "
+    >
+      {% comment %}
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64">
+          <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M19 17.61l27.12 27.13m0-27.13L19 44.74"/>
+        </svg>
+      {% endcomment %}
+      Close
+    </button>
+    <div id="predictive-search" class="search__results" tabindex="-1"></div>
+  </form>
+</predictive-search>

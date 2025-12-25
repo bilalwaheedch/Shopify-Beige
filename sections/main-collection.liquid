@@ -1,0 +1,596 @@
+{%- liquid
+  assign show_sidebar = true
+  assign total_tags = 0
+
+  if section.settings.enable_sidebar == false or collection.filters.size == 0
+    assign show_sidebar = false
+  endif
+-%}
+
+{% liquid
+  if collection.products
+      assign count = collection.products_count
+      assign count_label = 'collections.general.items_with_count'
+  endif
+
+  if collection.results
+      assign count = collection.results_count
+      assign count_label = 'general.search.result_count'
+  endif
+
+  assign current_filter_size = 0
+  for filter in filters
+    assign current_filter_size = current_filter_size | plus: filter.active_values.size
+  endfor
+%}
+
+
+<style>
+
+  .grid__image-ratio:before {
+    display: none !important;
+  }
+
+  .grid__image-ratio img {
+    position: initial !important;
+    height: auto;
+  }
+
+  .grid__image-ratio image-element {
+    position: initial;
+  }
+
+  .grid-product__image-wrap {
+    margin: 0;
+  }
+
+  [data-grid-style*=grey] .grid-product:after {
+    background: rgb(255 255 255 / 3%);
+  }
+
+  [data-grid-style=grey-round] .grid-item__link {
+    border-radius: 0 0 0 0 !important;
+  }
+
+  .main-align-text-top {
+    max-width: 600px;
+    margin-left: auto;
+    padding: 3em 0;
+  }
+
+  .text-top-main h1 {
+    font-size: 24px;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .text-top-main p {
+    font-size: 14px;
+  }
+
+  [data-view=list] .grid-product__image-wrap {
+    margin: 0 !important;
+  }
+
+  .grid__item--sidebar {
+    position: initial !important;
+  }
+
+  @media screen and (max-width: 999px) {
+    .main-align-text-top {
+      display: block !important;
+      max-width: 100%;
+      padding: 3em 0 0;
+    }
+    .text-top-main p {
+      display: none;
+    }
+    .text-top-main h1 {
+      text-align: center;
+    }
+    .text-top-main h1 {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .grid-item {
+      padding-left: 2px !important;
+      padding-right: 2px !important;
+    }
+    .grid-product__price--current {
+      font-weight: 400;
+      font-size: 12px;
+    }
+    [data-view=list] .grid-item__meta {
+      text-align: left;
+    }
+    [data-view=list] .grid-product__price--current {
+      font-size: 14px;
+    }
+    .grid-product__title {
+      font-size: 12px;
+    }
+    [data-view=list] .grid-product__image-wrap {
+      margin: 0 !important;
+    }
+    .grid-item__meta-secondary {
+      margin-top: 2px;
+    }
+    .collection-filter {
+      background: #fff;
+    }
+
+    .grid {
+      margin-left: 0;
+    }
+
+    .collection-filter {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .new-grid {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .grid__item {
+      padding-left: 0 !important;
+    }
+
+
+    #CollectionAjaxContent .page-width {
+      padding: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    .text-top-main h1 {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<div
+  id="CollectionAjaxResult"
+  class="collection-content"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template"
+  data-collection-template="true">
+  <div id="CollectionAjaxContent">
+    <div class="page-width">
+      {%- liquid
+        assign paginate_by = 40
+
+        assign current_filter_size = 0
+        for filter in collection.filters
+          assign current_filter_size = current_filter_size | plus: filter.active_values.size
+        endfor
+      -%}
+
+      {%- paginate collection.products by paginate_by -%}
+        <div class="grid">
+          <div class="grid__item medium-up--one-fifth grid__item--sidebar cc-collection">
+            {%- render 'collection-grid-filters'
+              , collection: collection,
+              enable_sidebar: section.settings.enable_sidebar,
+              enable_color_swatches: section.settings.enable_color_swatches,
+              tags_combine: section.settings.tags_combine,
+              enable_sort: section.settings.enable_sort,
+              collapse_filters: section.settings.collapse_filters -%}
+          </div>
+          <div class="grid__item medium-up--four-fifths grid__item--content">
+
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'collection_description' -%}
+                {%- if collection.description != blank and current_filter_size == 0 -%}
+                  <div class="rte rte--collection-desc" {{ block.shopify_attributes }}>
+                    <div class="enlarge-text">
+                      {{ collection.description }}
+                    </div>
+                  </div>
+                {%- endif -%}
+                {%- when 'subcollections' -%}
+                {%- if paginate.current_page == 1 and current_filter_size == 0 -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- render 'subcollections' -%}
+                  </div>
+                {%- endif -%}
+                {%- when 'product_grid' -%}
+
+
+                <div {{ block.shopify_attributes }}>
+                  {%- render 'collection-grid'
+                    collection: collection,
+                    items: collection.products,
+                    grid_style: block.settings.grid_style,
+                    quick_shop_enable: settings.quick_shop_enable -%}
+                </div>
+
+                {%- liquid
+                if paginate.pages > 1
+                  render 'pagination', paginate: paginate
+                endif
+              -%}
+
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+<div id="popup" class="popup site-header__drawer site-header__cart">
+  <div class="popup-content site-header__drawer-animate">
+    <div class="header-popup">
+      <h2>Filters</h2>
+      <button
+        id="closePopupButton"
+        onclick="closePopupButton()"
+        class="filter-close">Close</button>
+    </div>
+    <form class="filter-form" id="collection-fitlters-form">
+      {%- for filter in collection.filters -%}
+        {%- capture filter_id -%}filter-{{ filter.label | handleize }}{%- endcapture -%}
+        {%- assign filter_index = forloop.index -%}
+        {%- assign collapsed_state = section.settings.collapse_filters -%}
+        <div class="collection-sidebar__group--{{ filter_index }}">
+          <div class="collection-sidebar__group">
+            {%- render 'collection-sidebar-filter-trigger'
+              , id: filter_id,
+              location: location,
+              title: filter.label,
+              index: filter_index,
+              collapsed_state: collapsed_state -%}
+            <div
+              data-id="{{ location }}-{{ filter_index }}"
+              data-collapsible-id="{{ filter_id }}"
+              id="openPopupButton-{{ filter_id }}"
+              class="collapsible-content collapsible-content--all{% unless collapsed_state %} is-open{% endunless %}"
+              {% unless collapsed_state %}style="height: auto;"{% endunless %}>
+              <div class="collapsible-content__inner">
+                {%- case filter.type -%}
+                  {%- when 'list' or 'boolean' -%}
+
+                  {%- liquid
+                      assign is_color = false
+                      assign swatch_file_extension = 'png'
+                      if enable_color_swatches
+                        assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                        assign downcased_label = filter.label | downcase
+                        if downcased_label contains swatch_trigger
+                          assign is_color = true
+                        elsif swatch_trigger == 'color' and downcased_label contains 'colour'
+                          assign is_color = true
+                        endif
+                      endif
+                    -%}
+
+                  <ul class="no-bullets tag-list{% if tags_combine %} tag-list--checkboxes{% endif %}{% if is_color %} tag-list--swatches{% endif %}">
+                    {%- assign tag_count = filter.values.size -%}
+                    {%- for filter_value in filter.values -%}
+                      {%- liquid
+                          assign tag_count = tag_count | plus: 1
+                          assign filter_value_index = forloop.index
+
+                          assign color_file_name = filter_value.label | handle | append: '.' | append: swatch_file_extension
+                          assign color_image = color_file_name | file_img_url: '50x50' | prepend: 'https:' | split: '?' | first
+                          assign color_swatch_fallback = filter_value.label | split: ' ' | last | handle
+                        -%}
+
+                      <li class="tag{% if filter_value.active %} tag--active{% endif %}{% if is_color %} tag--swatch{% endif %}{% if filter_value.count == 0%} hide{% endif %}">
+                        <label class="tag__checkbox-wrapper text-label">
+                          <input
+                            type="checkbox"
+                            class="tag__input"
+                            name="{{ filter_value.param_name }}"
+                            value="{{ filter_value.value }}"
+                            {% if filter_value.active -%}checked{% endif %}>
+                          {%- if is_color -%}
+                            <span
+                              class="color-swatch color-swatch--filter color-swatch--{{ filter_value.label | handle }}"
+                              title="{{ filter_value.label }}"
+                              style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">
+                              {{ filter_value.label }}
+                            </span>
+                            <span class="tag__text hide">{{ filter_value.label | escape }}</span>
+                          {%- else -%}
+                            <span id="count">
+                              <span class="tag__text">{{ filter_value.label | escape }}</span>
+                              {% comment %} ({{ filter_value.count }}) {% endcomment %}
+                            </span>
+                            <span class="tick--filter"> 
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  height="1em"
+                                  viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
+                              </span>
+                          {%- endif -%}
+                        </label>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+                  {%- assign total_tags = total_tags | plus: tag_count -%}
+
+                  {%- if tag_count == 0 -%}
+                    {%- style -%}
+                      .collection-sidebar__group--{{ filter_index }}{
+                        display: none;
+                      }
+                    {%- endstyle -%}
+                  {%- endif -%}
+                  {%- when 'price_range' -%}
+                  {% comment %} Comma code from Dawn {% endcomment %}
+                  {% liquid
+                      assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                      assign uses_comma_decimals = false
+
+                      if currencies_using_comma_decimals contains cart.currency.iso_code
+                        assign uses_comma_decimals = true
+                      endif
+
+                      assign filter_min_value = filter.min_value.value | money_without_currency | replace: ',', ''
+                      assign filter_max_value = filter.max_value.value | money_without_currency | replace: ',', ''
+                      assign filter_range_min = filter.range_min | money_without_currency | replace: ',', ''
+                      assign filter_range_max = filter.range_max | money_without_currency | replace: ',', ''
+
+                      if uses_comma_decimals
+                        if filter.min_value.value
+                          assign filter_min_value = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                        endif
+
+                        if filter.max_value.value
+                          assign filter_max_value = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                        endif
+
+                        assign filter_range_min = filter.range_min | money_without_currency | replace: '.', '' | replace: ',', '.'
+                        assign filter_range_max = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+                      endif
+                    %}
+                  <div
+                    class="price-range"
+                    data-min-value="{{ filter_min_value }}"
+                    data-min-name="{{ filter.min_value.param_name }}"
+                    data-min="{{ filter_range_min }}"
+                    data-max-value="{{ filter_max_value }}"
+                    data-max-name="{{ filter.max_value.param_name }}"
+                    data-max="{{ filter_range_max }}">
+                    <div class="price-range__display-wrapper">
+                      <span class="price-range__display-min">{{ filter_min_value }}</span>
+                      <span class="price-range__display-max">{{ filter_max_value }}</span>
+                    </div>
+                    <div class="price-range__slider-wrapper">
+                      <div class="price-range__slider"></div>
+                    </div>
+                    <input
+                      class="price-range__input price-range__input-min"
+                      name="{{ filter.min_value.param_name }}"
+                      value="{{ filter_min_value }}"
+                      readonly>
+                    <input
+                      class="price-range__input price-range__input-max"
+                      name="{{ filter.max_value.param_name }}"
+                      value="{{ filter_max_value }}"
+                      readonly>
+                  </div>
+                {%- endcase -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+
+<!-- Sort Filters --> 
+
+      <div class="collection-sidebar__group--4">
+          <div class="collection-sidebar__group">
+            <button type="button" class="collapsible-trigger collapsible-trigger-btn collapsible--auto-height tag-list__header" data-controls="-1" data-collapsible-id="filter-sort" aria-expanded="false">
+              <span class="collapsible-trigger__layout collapsible-trigger__layout--inline">
+                <span>Sort</span>
+                <span class="collapsible-trigger__icon collapsible-trigger__icon--open" role="presentation">
+                  <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7L-2.38419e-07 0L8 0L4 7Z" fill="#191919"></path>
+                  </svg>
+
+                  <!-- <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg> -->
+                </span>
+
+              </span>
+            </button>
+            {%- liquid
+              assign sort_title = 'collections.sorting.title' | t
+              assign sort_by = collection.sort_by | default: collection.default_sort_by
+              assign sort_id = 'CollectionSidebarSort'
+            -%}
+            <div data-id="-1" data-collapsible-id="filter-sort" id="openPopupButton-filter-sort" class="collapsible-content collapsible-content--all is-open">
+              <div class="collapsible-content__inner">
+                <ul class="no-bullets tag-list">
+                  {%- for option in collection.sort_options -%}
+                  <li class="tag">
+                        <label for="sort-{{ option.value }}" class="tag__checkbox-wrapper text-label">
+                          <input id="sort-{{ option.value }}" type="checkbox" class="tag__input" {% comment  %}name="filter.v.{{ option.name }}" {% endcomment %} name="sort_by"  value="{{ option.value }}"><span id="count">
+                              <span class="tag__text">{{ option.name }}</span>
+                            </span>
+                            <span class="tick--filter"> 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                                </svg>
+                            </span>
+                          </label>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
+    <div class="clear-filter-text">
+      
+      <button class="btn-show" onclick="closePopupButton()">Show
+        <span id="p-count"></span>
+        Results
+      </button>
+      <a href="" onclick="clearFilters()">
+        Clear all filters
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{%- if show_sidebar == false -%}
+  {% comment %}
+  Disable sidebar & filter features
+  {% endcomment %}{%- style -%}
+    .collection-content .grid__item--sidebar {
+      display: none;
+    }
+    .collection-content .grid__item--content {
+      width: 100% !important;
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+<script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+                  "@type": "CollectionPage",{% if collection.description != blank %}
+    "description": {{ collection.description | strip_html | json }},
+  {% endif %}
+  {% if page_image %}
+    {% assign image_size = page_image.width | append: 'x' %}
+    "image": {
+    "@type": "ImageObject",
+                                      "height": {{ page_image.height | json }},
+    "url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
+    "width": {{ page_image.width | json }}
+    },
+  {% endif %}
+  "name": {{ collection.title | json }}
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "t:sections.main-collection.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.main-collection.settings.header_filtering_and_sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sidebar",
+        "label": "t:sections.main-collection.settings.enable_sidebar.label",
+        "default": true,
+        "info": "t:sections.main-collection.settings.enable_sidebar.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "collapse_filters",
+        "label": "t:sections.main-collection.settings.collapse_filters.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_color_swatches",
+        "label": "t:sections.main-collection.settings.enable_color_swatches.label",
+        "info": "t:sections.main-collection.settings.enable_color_swatches.info"
+      }, {
+        "type": "checkbox",
+        "id": "enable_sort",
+        "label": "t:sections.main-collection.settings.enable_sort.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection_description",
+        "name": "t:sections.main-collection.blocks.collection_description.name",
+        "limit": 1
+      }, {
+        "type": "product_grid",
+        "name": "t:sections.main-collection.blocks.products.name",
+        "settings": [
+          {
+            "type": "select",
+            "id": "grid_style",
+            "label": "t:sections.main-collection.blocks.products.settings.grid_style.label",
+            "default": "medium",
+            "options": [
+              {
+                "value": "large",
+                "label": "t:sections.main-collection.blocks.products.settings.grid_style.options.large.label"
+              }, {
+                "value": "medium",
+                "label": "t:sections.main-collection.blocks.products.settings.grid_style.options.small.label"
+              }, {
+                "value": "list",
+                "label": "t:sections.main-collection.blocks.products.settings.grid_style.options.list.label"
+              }
+            ]
+          }
+        ],
+        "limit": 1
+      }, {
+        "type": "subcollections",
+        "name": "t:sections.main-collection.blocks.subcollections.name",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-collection.blocks.subcollections.settings.content"
+          }
+        ],
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}
+
+
+<script>
+  function openPopupButton(e) {
+    var buttonId = e.target.id;
+    var popups = document.querySelectorAll('.popup');
+    $('.popup').addClass('is-active');
+    $('body').addClass('no-scroll-layer');
+    var accordionHeaders = document.querySelectorAll(`.collapsible-content.collapsible-content--all[id="${buttonId}"]`);
+    for (var j = 0; j < accordionHeaders.length; j++) {
+      accordionHeaders[j].classList.add('is-open');
+    }
+
+// var accordionContents = document.querySelectorAll(`.accordion-content[id="${buttonId}"]`);
+// for (var k = 0; k < accordionContents.length; k++) {
+// accordionContents[k].style.display = 'block';
+// }
+
+  }function closePopupButton() {
+    var popups = document.querySelectorAll('.popup');
+    $('.popup').removeClass('is-active');
+    $('body').removeClass('no-scroll-layer');
+
+    var accordionHeaders = document.querySelectorAll('.collapsible-content.collapsible-content--all');
+    for (var k = 0; k < accordionHeaders.length; k++) {
+      accordionHeaders[k].classList.remove('is-open');
+    }
+  }
+
+  function clearFilters(){
+    const path = window.location.href;
+    if (window.history.replaceState) {
+      var cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+      window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+    }
+    window.location.reload(cleanUrl);
+
+  }
+  
+</script>

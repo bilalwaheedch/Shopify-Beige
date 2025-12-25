@@ -1,0 +1,136 @@
+<section id="announcement-bar" class="announcement-bar" {% unless section.settings.show_bar %}style="display: none;"{% endunless %}>
+  <div class="announcement-scroller">
+    <div class="announcement-content">
+      {% for block in section.blocks %}
+        <div class="announcement-slide">
+          {{ block.settings.text }}
+        </div>
+      {% endfor %}
+      {% for block in section.blocks %}
+        <div class="announcement-slide">
+          {{ block.settings.text }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <style>
+    .announcement-bar {
+      background-color: {{ section.settings.background_color }};
+      color: {{ section.settings.text_color }};
+      padding: 10px 0;
+      text-align: center;
+      font-size: 14px;
+      position: relative;
+      top: 0;
+      width: 100%;
+      z-index: 9999;
+      overflow: hidden;
+      height: 35px;
+    }
+
+    .announcement-scroller {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .announcement-content {
+      display: flex;
+      width: max-content;
+      animation: scroll {{ section.settings.scroll_speed }}s linear infinite;
+    }
+
+    .announcement-slide {
+      margin-right: 50px; /* Space between announcements */
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Show Announcement Bar",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "number",
+      "id": "scroll_speed",
+      "label": "Scroll Speed (seconds)",
+      "default": 15
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Slide Text",
+          "default": "<p>Your announcement here!</p>"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "show_bar": true,
+      "background_color": "#f8f9fa",
+      "text_color": "#333333",
+      "scroll_speed": 15
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "settings": {
+          "text": "<p>Free Shipping on orders over $50!</p>"
+        }
+      },
+      {
+        "type": "text",
+        "settings": {
+          "text": "<p>50% off selected items!</p>"
+        }
+      },
+      {
+        "type": "text",
+        "settings": {
+          "text": "<p>Join our loyalty program for exclusive deals!</p>"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}
+
+
+

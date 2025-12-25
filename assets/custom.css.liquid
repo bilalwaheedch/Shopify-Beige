@@ -1,0 +1,306 @@
+.predictive__screen:after {
+    content: "";
+    background: red;
+    height: 100vh;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    background: white;
+    border: 1px solid black;
+}
+
+.newslatter-section {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 0;
+  border-right: 0;
+  border-left: 0;
+  margin: 1em 0;
+}
+
+.newslatter-section a {
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.newslatter-section p {
+  margin: 10 PX 0;
+}
+
+.main-video-new video {
+  width: 99%;
+}
+
+
+/* -------------------- Collection CSS ------------------  */
+
+
+/* -------------------- footer CSS ------------------  */
+
+footer {
+	background: #fff;
+}
+
+.footer-col-title h3 {
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 0 10px;
+    font-family: 'Space Grotesk';
+    font-weight: 500;
+}
+
+
+.footer-col-main ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-col-main ul li {
+    list-style: none;
+    margin: 0;
+}
+
+.footer-col-main ul li a , .newslatter-text p {
+    position: relative;
+    min-width: unset;
+    padding: 0;
+    cursor: pointer;
+    overflow: visible;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 25px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-family: 'Inconsolata';
+    text-decoration: none !important; 
+    width: fit-content;
+}
+
+.footer-col-main ul li a:hover {
+    text-decoration: underline;
+}
+
+.input-newslatter input {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    border: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 25px;
+    font-family: 'Inconsolata';
+    color: #000;
+    outline: none !important;
+}
+
+.input-newslatter input::placeholder {
+    color: #000 !important;
+    opacity: 1;
+}
+
+.input-newslatter {
+    overflow: hidden;
+    position: relative;
+}
+
+.newslatter-text p {
+    font-size: 12px;
+    margin: 12px 0;
+}
+
+.align-footer-col {
+    display: flex;
+    padding: 40px 40px 55px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.footer-col-main {
+    width: calc((1/6) * 100%);
+}
+
+.footer-col-main.newslatter {
+    width: 25%;
+    margin-left: auto;
+}
+
+.made-by-text p {
+    text-align: center;
+    margin: 0;
+    padding: 1em 0;
+    font-size: 14px;
+    font-family: Space Grotesk;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+}
+
+.input-newslatter button {
+    border: none;
+    position: absolute;
+    top: 6px;
+    right: 0;
+    padding: 10px 16px;
+    transform: rotate(150deg);
+}
+
+.input-newslatter button svg {
+    width: 8px;
+    height: 8px;
+}
+
+.footer-col-main ul li a[data-drawers-trigger="contact"] {
+    position: relative;
+    display: inline-block;
+    margin-top: 35px;
+    padding: 9px 14px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    background: #fff;
+    border: 1px solid #000;
+    overflow: hidden;
+    transition: background .3s cubic-bezier(.25,.46,.45,.94);
+}
+
+.footer-col-main ul li a[data-drawers-trigger="contact"]:hover {
+  background: #000;
+  color: #fff;
+}
+
+.footer-col-main ul li a[data-drawers-trigger="contact"]::before {
+  display: none !important;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 991px) {
+	.footer-col-main {
+	    width: calc((1/3) * 100%);
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.align-footer-col {
+		display: block;
+		padding: 10px 10px 0;
+	}
+
+	.footer-col-main {
+		padding-top: 20px;
+		width: 100%;
+	}
+
+	.footer-col-main.newslatter {
+		width: 100%;
+	}
+
+	.newslatter-text p {
+		margin: 12px 0 30px;;
+	}
+
+	.footer-col-title h3 {
+		font-size: 16px;
+	}
+
+}
+
+
+
+
+/* ---------------Font family ---------------*/
+
+
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-ExtraBold.woff2' | asset_url | split: '?' | first }}');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-Light.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-LightItalic.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-BlackItalic.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-SemiLightItalic.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-SemiLight.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-Plain.woff2' | asset_url | split: '?' | first }}');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-ExtraLightItalic.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-Bold.woff2' | asset_url | split: '?' | first }}');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-ExtraLight.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSansMono";
+  src: url('{{ 'TheSansMono-SemiBold.woff2' | asset_url | split: '?' | first }}');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,47 @@
+<div class="variant-wrapper variant-wrapper--dropdown js" data-type="dropdown">
+  <!-- Label for the Dropdown -->
+  <label class="variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+    for="SingleOptionSelector-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
+    {{ option.name }}
+  </label>
+
+  <div class="variant-input-wrap" data-index="option{{ forloop.index }}" data-handle="{{ option.name | handleize }}">
+    <select
+      form="{{ form_id }}"
+      data-variant-input
+      id="SingleOptionSelector-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
+      data-index="option{{ forloop.index }}">
+        <option value="">Select {{option.name}}</option>
+      
+      
+      
+      <!-- Loop through the option values -->
+      {%- for value in option.values -%}
+        {%- liquid
+          assign variant_label_state = true
+          assign variant_with_price = false
+          
+          for variant in product.variants
+            if variant.options contains value
+              assign variant_with_price = variant
+              unless variant.available
+                assign variant_label_state = false
+              endunless
+            endif
+          endfor
+        -%}
+
+        <!-- Show the value along with the price -->
+        <option
+          value="{{ value | escape }}"
+          {% unless variant_label_state %} disabled="disabled"{% endunless %}
+          name="{{ option.name }}"
+          class="variant-input"
+          data-index="option{{ forloop.index }}">
+          <!-- {{ value }} - {{ variant_with_price.price | money }} -->
+            {{ value }}
+        </option>
+      {%- endfor -%}
+    </select>
+  </div>
+</div>

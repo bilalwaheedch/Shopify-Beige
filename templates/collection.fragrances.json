@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-header",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {}
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections": {
+          "type": "subcollections",
+          "disabled": true,
+          "settings": {}
+        },
+        "product_grid": {
+          "type": "product_grid",
+          "settings": {
+            "grid_style": "large"
+          }
+        }
+      },
+      "block_order": [
+        "subcollections",
+        "product_grid"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "enable_sidebar": true,
+        "collapse_filters": true,
+        "enable_color_swatches": true,
+        "enable_sort": true
+      }
+    },
+    "featured_collection_x8tUEB": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "New Arrivals",
+        "heading_size": "h0",
+        "heading_position": "right",
+        "home_featured_products": "new-arrivals",
+        "count": 5,
+        "products_per_row": 3,
+        "mobile_scrollable": true,
+        "view_all": false,
+        "divider": false
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {}
+    },
+    "full_banner_cErLa6": {
+      "type": "full-banner",
+      "name": "Fill Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/Jaguar-ERA-Reloaded-1920x1010px-final.webp",
+        "heading": "New Arrival",
+        "banner_link": "#"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "main-collection",
+    "featured_collection_x8tUEB",
+    "recently-viewed",
+    "full_banner_cErLa6"
+  ]
+}

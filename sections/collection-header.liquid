@@ -1,0 +1,40 @@
+
+
+<style>
+  .full-page-width {
+    max-width: 1500px;
+  }
+  .collection-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border: none !important;
+  }
+  .grid__item.medium-up--one-fifth.grid__item--sidebar {
+    margin-bottom: -34px;
+  }
+  .grid-view-btn svg {
+    width: 58px !important;
+    height: 14px !important;
+  }
+  
+  .grid-view-btn {
+      padding: 0;
+  }
+  
+  .collection-filter {
+    margin-bottom: 50px;
+  }
+</style>
+
+<div class="page-width full-page-width">
+  <div class="main-align-text-top">
+    <div class="align-top-text">
+      <div class="text-top-main">
+      {%- comment -%}
+      <h1>{{ collection.title }}</h1>
+      {%- endcomment -%}
+        <p>{{ collection.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
