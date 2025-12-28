@@ -136,9 +136,14 @@
         "disabled": false,
         "settings": {}
       },
+      "13134784737477764344": {
+        "type": "shopify://apps/dotstore-extra-fees-manager/blocks/app-embed/0199af2c-2de5-7759-80d6-4dc733b46ff4",
+        "disabled": false,
+        "settings": {}
+      },
       "7132111355726832890": {
         "type": "shopify://apps/payfee-payment-method-discount/blocks/payment-block/7ae9181b-a595-4c8b-9005-1414b04e4646",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
