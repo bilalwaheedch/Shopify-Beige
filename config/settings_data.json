@@ -1,1 +1,151 @@
-{"current":{"color_body_bg":"#fff","color_header":"#fff","color_scheme_1_texture":"swirl","type_header_font_family":"nunito_sans_n3","type_header_base_size":24,"type_header_line_height":1,"type_header_capitalize":true,"type_base_font_family":"mono","type_base_spacing":"10","type_base_size":16,"type_navigation_style":"body","type_navigation_size":16,"button_style":"square","cart_icon":"bag","icon_weight":"2px","icon_linecaps":"round","animate_page_transitions":true,"product_save_amount":false,"product_grid_image_fill":true,"product_hover_image":true,"enable_swatches":true,"swatch_style":"square","product_grid_style":"grey-round","product_grid_image_margin":5,"collection_grid_shape":"portrait","collection_grid_image_fill":true,"collection_grid_image":"collection","favicon":"shopify:\/\/shop_images\/Beige-Favicon.png","show_breadcrumbs":false,"checkout_logo_image":"shopify:\/\/shop_images\/Beige-Logo-Black_0.2x.png","checkout_body_background_color":"#ffffff","checkout_input_background_color_mode":"white","checkout_heading_font":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'","checkout_accent_color":"#1c1d1d","checkout_button_color":"#1c1d1d","sections":{"newsletter-popup":{"type":"newsletter-popup","blocks":{"newsletter-popup-0":{"type":"header","settings":{"reminder_label":"Get 10% off"}}},"block_order":["newsletter-popup-0"],"settings":{"disable_for_account_holders":true,"popup_seconds":30,"popup_days":30,"popup_title":"Sign up and save","popup_text":"<p>Entice customers to sign up for your mailing list with discounts or exclusive offers. Include an image for extra impact.<\/p>","image_position":"left","color_scheme":"none","show_social_icons":false,"enable_newsletter":true,"button_label":"Optional button","button_link":""}},"promotional-bar":{"type":"promotional-bar","blocks":{"promotional-bar-0":{"type":"text","settings":{"text":"<p>FLAT 30% OFF - Starting Tonight<\/p>"}},"text_hDxHWb":{"type":"text","settings":{"text":"<p>Coming Soon - Up to  50% Off<\/p>"}},"promotional-bar-1":{"type":"text","settings":{"text":"<p>Coming Soon - Up to  50% Off<\/p>"}},"promotional-bar-2":{"type":"text","settings":{"text":"<p>Coming Soon - Up to  50% Off<\/p>"}}},"block_order":["promotional-bar-0","text_hDxHWb","promotional-bar-1","promotional-bar-2"],"settings":{"show_bar":false,"background_color":"#d29f73","text_color":"#ffffff","scroll_speed":40}}},"content_for_index":[],"blocks":{"320593021044489861":{"type":"shopify:\/\/apps\/sales-discounts\/blocks\/countdown\/29205fb1-2e68-4d81-a905-d828a51c8413","disabled":false,"settings":{}},"4608251692753025422":{"type":"shopify:\/\/apps\/sales-discounts\/blocks\/sale-labels\/29205fb1-2e68-4d81-a905-d828a51c8413","disabled":false,"settings":{}},"11068332061543699368":{"type":"shopify:\/\/apps\/booster-page-speed-optimizer\/blocks\/app-embed\/d920faf3-7c60-423a-9636-22618b5561b5","disabled":false,"settings":{}},"6610233760104865948":{"type":"shopify:\/\/apps\/pushowl\/blocks\/pushowl-app-embed-3d2ff2b5\/fa20c3ba-38bf-43e0-ba5c-431f6ae07d95","disabled":false,"settings":{}}}},"platform_customizations":{"custom_css":[".collection-image-wrap {display: none;}"]}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_body_bg": "#fff",
+    "color_header": "#fff",
+    "color_scheme_1_texture": "swirl",
+    "type_header_font_family": "nunito_sans_n3",
+    "type_header_base_size": 24,
+    "type_header_line_height": 1,
+    "type_header_capitalize": true,
+    "type_base_font_family": "mono",
+    "type_base_spacing": "10",
+    "type_base_size": 16,
+    "type_navigation_style": "body",
+    "type_navigation_size": 16,
+    "button_style": "square",
+    "cart_icon": "bag",
+    "icon_weight": "2px",
+    "icon_linecaps": "round",
+    "animate_page_transitions": true,
+    "product_save_amount": false,
+    "product_grid_image_fill": true,
+    "product_hover_image": true,
+    "enable_swatches": true,
+    "swatch_style": "square",
+    "product_grid_style": "grey-round",
+    "product_grid_image_margin": 5,
+    "collection_grid_shape": "portrait",
+    "collection_grid_image_fill": true,
+    "collection_grid_image": "collection",
+    "favicon": "shopify://shop_images/Beige-Favicon.png",
+    "show_breadcrumbs": false,
+    "checkout_logo_image": "shopify://shop_images/Beige-Logo-Black_0.2x.png",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#1c1d1d",
+    "checkout_button_color": "#1c1d1d",
+    "sections": {
+      "newsletter-popup": {
+        "type": "newsletter-popup",
+        "blocks": {
+          "newsletter-popup-0": {
+            "type": "header",
+            "settings": {
+              "reminder_label": "Get 10% off"
+            }
+          }
+        },
+        "block_order": [
+          "newsletter-popup-0"
+        ],
+        "settings": {
+          "disable_for_account_holders": true,
+          "popup_seconds": 30,
+          "popup_days": 30,
+          "popup_title": "Sign up and save",
+          "popup_text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers. Include an image for extra impact.</p>",
+          "image_position": "left",
+          "color_scheme": "none",
+          "show_social_icons": false,
+          "enable_newsletter": true,
+          "button_label": "Optional button",
+          "button_link": ""
+        }
+      },
+      "promotional-bar": {
+        "type": "promotional-bar",
+        "blocks": {
+          "promotional-bar-0": {
+            "type": "text",
+            "settings": {
+              "text": "<p>FLAT 30% OFF - Starting Tonight</p>"
+            }
+          },
+          "text_hDxHWb": {
+            "type": "text",
+            "settings": {
+              "text": "<p>Coming Soon - Up to  50% Off</p>"
+            }
+          },
+          "promotional-bar-1": {
+            "type": "text",
+            "settings": {
+              "text": "<p>Coming Soon - Up to  50% Off</p>"
+            }
+          },
+          "promotional-bar-2": {
+            "type": "text",
+            "settings": {
+              "text": "<p>Coming Soon - Up to  50% Off</p>"
+            }
+          }
+        },
+        "block_order": [
+          "promotional-bar-0",
+          "text_hDxHWb",
+          "promotional-bar-1",
+          "promotional-bar-2"
+        ],
+        "settings": {
+          "show_bar": false,
+          "background_color": "#d29f73",
+          "text_color": "#ffffff",
+          "scroll_speed": 40
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "320593021044489861": {
+        "type": "shopify://apps/sales-discounts/blocks/countdown/29205fb1-2e68-4d81-a905-d828a51c8413",
+        "disabled": false,
+        "settings": {}
+      },
+      "4608251692753025422": {
+        "type": "shopify://apps/sales-discounts/blocks/sale-labels/29205fb1-2e68-4d81-a905-d828a51c8413",
+        "disabled": false,
+        "settings": {}
+      },
+      "11068332061543699368": {
+        "type": "shopify://apps/booster-page-speed-optimizer/blocks/app-embed/d920faf3-7c60-423a-9636-22618b5561b5",
+        "disabled": false,
+        "settings": {}
+      },
+      "6610233760104865948": {
+        "type": "shopify://apps/pushowl/blocks/pushowl-app-embed-3d2ff2b5/fa20c3ba-38bf-43e0-ba5c-431f6ae07d95",
+        "disabled": false,
+        "settings": {}
+      },
+      "7132111355726832890": {
+        "type": "shopify://apps/payfee-payment-method-discount/blocks/payment-block/7ae9181b-a595-4c8b-9005-1414b04e4646",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".collection-image-wrap {display: none;}"
+    ]
+  }
+}
